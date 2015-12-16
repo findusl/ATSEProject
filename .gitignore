@@ -43,12 +43,6 @@ proguard/
 # Log Files
 *.log
 
-# Android Studio Navigation editor temp files
-.navigation/
-
-# Android Studio captures folder
-captures/
-
 ### Android Patch ###
 gen-external-apklibs
 
@@ -64,11 +58,7 @@ tmp/
 *.swp
 *~.nib
 local.properties
-.settings/
 .loadpath
-
-# Eclipse Core
-.project
 
 # External tool builders
 .externalToolBuilders/
@@ -78,9 +68,6 @@ local.properties
 
 # CDT-specific
 .cproject
-
-# JDT-specific (Eclipse Java Development Tools)
-.classpath
 
 # Java annotation processor (APT)
 .factorypath
