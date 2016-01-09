@@ -73,3 +73,6 @@ local.properties
 
 # STS (Spring Tool Suite)
 .springBeans
+
+# Eclipse "RemoteSystemsTempFiles"
+RemoteSystemsTempFiles/
