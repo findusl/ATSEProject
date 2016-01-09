@@ -68,7 +68,9 @@ public class User {
 		password = user_password;
 		System.err.println("User.java: name: '"+name+"'");
 	}
-
+	
+	// TODO: Use better hash algorithm (SHA-256?)!
+	// TODO: Salt passwords!
 	public static String hash(String password){
 		byte[] digest = null;
 		try	{
@@ -101,7 +103,7 @@ public class User {
 	}
 	
 	public static String createTicket(String id, String address, Double balance,ArrayList<ETicket> list) throws IOException{
-		// Should be stored seperately 
+		// TODO: Key should be stored separately 
 		String pem = "-----BEGIN RSA PRIVATE KEY-----\n"
 			+"MIIEpQIBAAKCAQEAwXUffSp3HjYVGw4d+Ggba82nh2VBHT5wlRmwbQKXzvDCrEaL\n"
 			+"5cJtcdELlhnTUQbqlQF+eIQl3os6RGHHI75SMHz+QBjxMxOs2C2EcbycqXaqRrD5\n"

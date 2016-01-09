@@ -45,6 +45,7 @@
 	}
 %>
 </ul>
+<h2>Add User</h2>
 <form action="/add" method="post">
 	<div>Name:<input type="text" name="user_name" /></div>
 	<div>E-Mail:<input type="text" name="user_email" /></div>
