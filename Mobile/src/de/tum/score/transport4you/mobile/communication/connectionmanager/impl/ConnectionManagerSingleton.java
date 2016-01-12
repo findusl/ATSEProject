@@ -1,8 +1,8 @@
 package de.tum.score.transport4you.mobile.communication.connectionmanager.impl;
 
+import android.content.Context;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.communication.connectionmanager.ICommunication;
-import android.content.Context;
 
 public class ConnectionManagerSingleton {
 	private static ConnectionManager connectionManager;

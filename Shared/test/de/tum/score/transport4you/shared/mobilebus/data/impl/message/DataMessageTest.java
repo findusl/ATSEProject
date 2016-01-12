@@ -1,6 +1,7 @@
 package de.tum.score.transport4you.shared.mobilebus.data.impl.message;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileReader;
 import java.security.KeyPair;
@@ -18,7 +19,6 @@ import org.junit.Test;
 
 import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.KeyExchange;
 import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.SignedPublicKey;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.message.DataMessage;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;

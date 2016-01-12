@@ -1,7 +1,6 @@
 package de.tum.score.transport4you.shared.mobilebus.data.impl.message;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 

@@ -7,16 +7,13 @@ import java.security.PublicKey;
 import java.security.Security;
 import java.security.cert.X509Certificate;
 
-import junit.framework.Assert;
-
 import org.bouncycastle.openssl.PEMReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.KeyExchange;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.SignedPublicKey;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
+import junit.framework.Assert;
 
 
 public class BlobEncryptionTest {

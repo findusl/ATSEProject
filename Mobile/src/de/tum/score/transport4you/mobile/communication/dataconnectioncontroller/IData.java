@@ -1,12 +1,10 @@
 package de.tum.score.transport4you.mobile.communication.dataconnectioncontroller;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import org.restlet.resource.ResourceException;
 
 import android.content.Context;
-
 import de.tum.score.transport4you.mobile.communication.dataconnectioncontroller.error.RESTException;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
 import de.tum.score.transport4you.shared.mobileweb.impl.message.MobileSettings;

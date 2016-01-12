@@ -72,7 +72,7 @@ public class LoginScreen extends Activity implements IPresentation{
                 	startActivity(mainIntent);
                     //finish();
                 } else {
-                	Toast toast = Toast.makeText(currentContext, "Login failed - provided wrong credentials?", 1000);
+                	Toast toast = Toast.makeText(currentContext, "Login failed - provided wrong credentials?", Toast.LENGTH_LONG);
                 	toast.show();
                 }
                 

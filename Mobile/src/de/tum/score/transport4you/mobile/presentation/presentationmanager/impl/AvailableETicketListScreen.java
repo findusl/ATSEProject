@@ -3,10 +3,8 @@ package de.tum.score.transport4you.mobile.presentation.presentationmanager.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import de.tum.score.transport4you.mobile.R;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.impl.ApplicationSingleton;

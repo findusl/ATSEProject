@@ -3,23 +3,17 @@ package de.tum.score.transport4you.mobile.presentation.presentationmanager.impl;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
 import de.tum.score.transport4you.mobile.R;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.impl.ApplicationSingleton;
 import de.tum.score.transport4you.mobile.presentation.presentationmanager.IPresentation;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 
 public class ETicketListScreen extends Activity implements IPresentation{
     private IMainApplication mainApplication;
