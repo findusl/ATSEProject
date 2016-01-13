@@ -12,7 +12,7 @@
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/t4y_bus" />
+				value="jdbc:mysql://do-fra.boinx.com:3306" />
 			<property name="javax.persistence.jdbc.user" value="bus" />
 			<property name="javax.persistence.jdbc.password" value="transportation" />
 			<!-- EclipseLink should create the database schema automatically -->

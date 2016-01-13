@@ -52,7 +52,9 @@ public class System implements ISystem{
 		
 		//Check parameter size
 		if(args.length!= 2) {
-			throw new RuntimeException("Not enough parameters");
+			//TODO: remove because debug version
+			args = new String []{"res/system.conf", "res/log4j.conf"};
+			//throw new RuntimeException("Not enough parameters");
 		}
 		File configurationFile = new File(args[0]);
 		File loggingConfigurationFile = new File(args[1]);
