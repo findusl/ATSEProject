@@ -3,6 +3,8 @@ package de.tum.score.transport4you.bus.communication.camera.impl;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
@@ -13,6 +15,7 @@ import javax.swing.JTextArea;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
@@ -21,19 +24,32 @@ import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 
-public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory {
+import de.tum.score.transport4you.bus.communication.camera.ICameraQRCodeListener;
+import de.tum.score.transport4you.bus.communication.camera.IStartup;
+
+public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory, ICameraQRCodeListener{
 
 	private static final long serialVersionUID = 6441489157408381878L;
+
+	/* Used for storing the singleton instance */
+	private static QRCodeCapturer instance = null;
 
 	private Executor executor = Executors.newSingleThreadExecutor(this);
 
 	private Webcam webcam = null;
 	private WebcamPanel panel = null;
 	private JTextArea textarea = null;
+	
+	private List<ICameraQRCodeListener> listeners;
 
-	public QRCodeCapturer() {
+	private QRCodeCapturer() {
 		super();
-
+		init();//init layout
+		listeners = new LinkedList<ICameraQRCodeListener>();
+		listeners.add(this);
+	}
+	
+	public void init() {
 		setLayout(new FlowLayout());
 		setTitle("Read QR / Bar Code With Webcam");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,9 +70,25 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory {
 		add(textarea);
 
 		pack();
+	}
+	
+	public static QRCodeCapturer getInstance() {
+		if(instance == null)
+			instance = new QRCodeCapturer();
+		return instance;
+	}
+	
+	public void startService() {
 		setVisible(true);
-
 		executor.execute(this);
+	}
+
+	public void addCameraQRCodeListener(ICameraQRCodeListener listener) {
+		listeners.add(listener);
+	}
+	
+	public boolean removeCameraQRCodeListener(ICameraQRCodeListener listener) {
+		return listeners.remove(listener);
 	}
 
 	@Override
@@ -67,6 +99,7 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
+				return; //service has been interrupted. finish it
 			}
 
 			Result result = null;
@@ -88,11 +121,18 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory {
 				}
 			}
 
-			if (result != null) {
-				textarea.setText(result.getText());
+			if (result != null && result.getBarcodeFormat().equals(BarcodeFormat.QR_CODE)) {
+				for(ICameraQRCodeListener listener : listeners) {
+					listener.onQRCodeRead(result.getText());
+				}
 			}
 
 		} while (true);
+	}
+	
+	@Override
+	public void onQRCodeRead(String content) {
+		textarea.setText(content);
 	}
 
 	@Override

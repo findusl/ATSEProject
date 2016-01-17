@@ -17,6 +17,7 @@ import com.github.sarxos.webcam.Webcam;
 
 import de.tum.score.transport4you.bus.application.applicationcontroller.ApplicationControllerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.application.applicationcontroller.ISystem;
+import de.tum.score.transport4you.bus.communication.camera.CameraControllerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.communication.camera.impl.QRCodeCapturer;
 import de.tum.score.transport4you.bus.communication.connectionmanager.ConnectionManagerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.data.datacontroller.DataControllerInterfaceCoordinator;
@@ -96,9 +97,7 @@ public class System implements ISystem{
 		ApplicationControllerInterfaceCoordinator.getStartup().init();
 		logger.info("Application Controller Component initialized");
 		
-		logger.info("Initialize QR Code reader");
-		new QRCodeCapturer();
-		logger.info("QR Code reader initialized");
+		CameraControllerInterfaceCoordinator.getStartup().init();
 	}
 
 	@Override
