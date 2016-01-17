@@ -1,17 +1,23 @@
 package de.tum.score.transport4you.bus.application.applicationcontroller.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.security.Security;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.imageio.ImageIO;
+
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.github.sarxos.webcam.Webcam;
+
 import de.tum.score.transport4you.bus.application.applicationcontroller.ApplicationControllerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.application.applicationcontroller.ISystem;
+import de.tum.score.transport4you.bus.communication.camera.impl.QRCodeCapturer;
 import de.tum.score.transport4you.bus.communication.connectionmanager.ConnectionManagerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.data.datacontroller.DataControllerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.data.datacontroller.error.DataControllerInitializingException;
@@ -49,7 +55,6 @@ public class System implements ISystem{
 	 * @param args Parameter list:<br>1 - path to configuration file<br>2 - path to logging property file
 	 */
 	public static void main(String[] args) {
-		
 		//Check parameter size
 		if(args.length!= 2) {
 			//TODO: remove because debug version
@@ -91,7 +96,9 @@ public class System implements ISystem{
 		ApplicationControllerInterfaceCoordinator.getStartup().init();
 		logger.info("Application Controller Component initialized");
 		
-		
+		logger.info("Initialize QR Code reader");
+		new QRCodeCapturer();
+		logger.info("QR Code reader initialized");
 	}
 
 	@Override
