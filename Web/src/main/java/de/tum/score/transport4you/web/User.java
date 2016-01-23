@@ -51,7 +51,7 @@ public class User {
 	@Index public Date date;
 
 	public User() {
-		date = new Date();
+		this.date = new Date();
 	}
 
 	public User(String group, String user_name, String user_email, String user_ticket, String user_password){
@@ -62,8 +62,8 @@ public class User {
 		} else {
 			userGroup = Key.create(Group.class, "default");
 		}
-		name = user_name;
-		email = user_email;
+		this.name = user_name;
+		this.email = user_email;
 		ticket = user_ticket;
 		password = user_password;
 		System.err.println("User.java: name: '"+name+"'");
