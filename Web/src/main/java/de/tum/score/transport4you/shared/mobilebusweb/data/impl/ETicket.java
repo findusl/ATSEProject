@@ -11,34 +11,30 @@ import javax.persistence.TemporalType;
 /**
  * Represents an ETicket
  * @author hoerning
- *
  */
 @Entity
-public class ETicket extends AbstractPersistenceObject {
-	
-	/**
-	 * 
-	 */
+public abstract class ETicket extends AbstractPersistenceObject {
 	private static final long serialVersionUID = 4865268647836014207L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	private long id;
+	protected long id;
 	
-	private boolean invalidated;
+	protected String customerId;
 	
-	private String customerId;
-	
-	private long validTime;
+	protected int validMinutes;
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date validUntil;
+	protected Date invalidatedAt;
 	
 	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date invalidatedAt;
+	protected Date sellingDate;
 	
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date sellingDate;
+	protected ETicketType ticketType;
+	
+	protected ETicket() {
+		this.sellingDate = new Date();
+	}
 
 	public long getId() {
 		return id;
@@ -49,35 +45,17 @@ public class ETicket extends AbstractPersistenceObject {
 	}
 
 	public boolean isInvalidated() {
-		return invalidated;
+		return this.getInvalidatedAt() != null;
 	}
 
-	public void setInvalidated(boolean invalidated) {
-		this.invalidated = invalidated;
+	public long getValidMinutes() {
+		return validMinutes;
 	}
 
-	public long getValidTime() {
-		return validTime;
-	}
-
-	public void setValidTime(long validTime) {
-		this.validTime = validTime;
-	}
-
-	public Date getValidUntil() {
-		return validUntil;
-	}
-
-	public void setValidUntil(Date validUntil) {
-		this.validUntil = validUntil;
-	}
+	public abstract Date getValidUntil();
 
 	public Date getSellingDate() {
 		return sellingDate;
-	}
-
-	public void setSellingDate(Date sellingDate) {
-		this.sellingDate = sellingDate;
 	}
 
 	public String getCustomerId() {
@@ -92,8 +70,24 @@ public class ETicket extends AbstractPersistenceObject {
 		return invalidatedAt;
 	}
 
-	public void setInvalidatedAt(Date invalidatedAt) {
+	protected void setInvalidatedAt(Date invalidatedAt) {
 		this.invalidatedAt = invalidatedAt;
+	}
+	
+	/**
+	 * Invalidates this ETicket by setting the <code>invalidatedAt</code> date to the current date and time.
+	 * 
+	 * @return true if successfully invalidated or false if already invalidated
+	 */
+	public boolean invalidate() {
+		if (!this.isInvalidated()) {
+			// set invalidation date to now
+			this.setInvalidatedAt(new Date());
+			
+			// indicate successful invalidation
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean equals(Object o)  {
