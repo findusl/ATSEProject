@@ -25,6 +25,7 @@ import org.w3c.dom.Document;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.communication.dataconnectioncontroller.IData;
 import de.tum.score.transport4you.mobile.communication.dataconnectioncontroller.error.RESTException;
@@ -33,6 +34,7 @@ import de.tum.score.transport4you.shared.mobileweb.impl.message.MobileSettings;
 
 @TargetApi(Build.VERSION_CODES.FROYO)
 public class DataConnectionController implements IData {
+	private static final String LOG_TAG = DataConnectionController.class.getSimpleName();
 
 	private static final String baseURL = "http://transport4you-1185.appspot.com/rest/";//"http://score-1042.appspot.com/rest/";
 	private IMainApplication mainApplication;
@@ -46,8 +48,8 @@ public class DataConnectionController implements IData {
 	@Override
 	public boolean checkAuthentication(Context context, String username, String password) throws RESTException {
 
+    	String md5 = computeMD5(password);
 	    try {
-	    	String md5 = computeMD5(password);
 	    	
 	    	//if debug mode is set, fix credentials for testing
 			if(mainApplication.isDebugModeEnabled()) {
@@ -65,9 +67,9 @@ public class DataConnectionController implements IData {
 	    		return true;
 	    	}	        
 	    } catch (ResourceException e) {
-	    	throw new RESTException("REST request failed (checkAuthentication)");
+	    	throw new RESTException("REST request failed (checkAuthentication)", e);
 	    } catch (IOException e) {
-	    	throw new RESTException("REST request failed (checkAuthentication)");
+	    	throw new RESTException("REST request failed (checkAuthentication)", e);
 		}
 	}
 	
