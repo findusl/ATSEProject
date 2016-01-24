@@ -23,7 +23,6 @@ import de.tum.score.transport4you.mobile.data.datacontroller.ISettingsDataContro
 import de.tum.score.transport4you.mobile.data.datacontroller.ISynchronizationDataController;
 import de.tum.score.transport4you.mobile.data.datacontroller.error.DataControllerException;
 import de.tum.score.transport4you.mobile.data.datacontroller.impl.DataController;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
 import de.tum.score.transport4you.shared.mobileweb.impl.message.MobileSettings;
 

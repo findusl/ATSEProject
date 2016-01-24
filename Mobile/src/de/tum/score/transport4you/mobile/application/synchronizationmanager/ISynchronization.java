@@ -1,6 +1,5 @@
 package de.tum.score.transport4you.mobile.application.synchronizationmanager;
 
-import android.content.Context;
 import de.tum.score.transport4you.mobile.application.synchronizationmanager.error.BlobException;
 import de.tum.score.transport4you.mobile.application.synchronizationmanager.error.SynchronizationException;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;

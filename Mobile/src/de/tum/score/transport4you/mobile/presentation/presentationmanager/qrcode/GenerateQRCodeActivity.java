@@ -1,9 +1,5 @@
 package de.tum.score.transport4you.mobile.presentation.presentationmanager.qrcode;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Point;
@@ -16,6 +12,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+
 import de.tum.score.transport4you.mobile.R;
 
 public class GenerateQRCodeActivity extends Activity implements OnClickListener{

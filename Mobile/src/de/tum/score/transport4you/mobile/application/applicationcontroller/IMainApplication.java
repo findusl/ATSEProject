@@ -1,12 +1,9 @@
 package de.tum.score.transport4you.mobile.application.applicationcontroller;
 
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.content.Context;
 import de.tum.score.transport4you.shared.mobilebus.data.impl.message.DataMessage;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 import de.tum.score.transport4you.shared.mobileweb.impl.message.MobileSettings;
 

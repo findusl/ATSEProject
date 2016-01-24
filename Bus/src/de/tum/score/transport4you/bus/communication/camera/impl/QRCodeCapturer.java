@@ -25,7 +25,6 @@ import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 
 import de.tum.score.transport4you.bus.communication.camera.ICameraQRCodeListener;
-import de.tum.score.transport4you.bus.communication.camera.IStartup;
 
 public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory, ICameraQRCodeListener{
 

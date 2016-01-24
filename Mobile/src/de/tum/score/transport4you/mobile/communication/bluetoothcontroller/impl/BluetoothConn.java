@@ -5,16 +5,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import de.tum.score.transport4you.mobile.communication.connectionmanager.ICommunication;
-
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.Build;
 import android.os.ParcelUuid;
 import android.util.Log;
+import de.tum.score.transport4you.mobile.communication.connectionmanager.ICommunication;
 
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1)
 public class BluetoothConn extends Thread implements IBluetoothTimeout {
