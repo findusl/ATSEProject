@@ -29,6 +29,8 @@ public abstract class ETicketType extends AbstractPersistenceObject{
 	
 	protected Double price;
 	
+	protected ETicketType() {}
+	
 	protected ETicketType(String name, int validMinutes) {
 		assert validMinutes > 0;
 		

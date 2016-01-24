@@ -36,7 +36,17 @@ public class ETicketSingle extends ETicket {
 		try {
 			entityManager.getTransaction().begin();
 			
+			// generate a sample type
+			//ETicketSingleType type = new ETicketSingleType("60mins 2-for-1", 60, 2, 0.5);
+			//entityManager.persist(type);
 			
+			// query types
+			javax.persistence.Query query = entityManager.createQuery("SELECT t FROM ETicketType t");
+			@SuppressWarnings("unchecked")
+			java.util.List<ETicketType> results = query.getResultList();
+			for (ETicketType ticket : results) {
+				System.out.println(ticket);
+			}
 			
 			entityManager.flush();
 			entityManager.getTransaction().commit();

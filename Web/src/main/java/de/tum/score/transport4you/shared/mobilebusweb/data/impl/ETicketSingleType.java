@@ -20,6 +20,8 @@ public class ETicketSingleType extends ETicketType {
 	 */
 	private Double discountFactor;
 	
+	protected ETicketSingleType() {}
+	
 	public ETicketSingleType(String name, int validMinutes) {
 		super(name, validMinutes);
 		
@@ -80,5 +82,14 @@ public class ETicketSingleType extends ETicketType {
 		}
 		
 		return tickets;
+	}
+	
+	@Override
+	public String toString() {
+		return "ETicketSingleType["+ 
+				"validMinutes=" + this.getValidMinutes() + "," +
+				"amount=" + this.getAmountTickets() + "," +
+				"discountFactor=" + this.getDiscountFactor() +
+				"]";
 	}
 }
