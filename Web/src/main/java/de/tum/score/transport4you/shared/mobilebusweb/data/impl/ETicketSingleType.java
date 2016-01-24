@@ -1,9 +1,10 @@
 package de.tum.score.transport4you.shared.mobilebusweb.data.impl;
 
 import java.util.List;
-import java.util.Date;
 import java.util.LinkedList;
+import javax.persistence.Entity;
 
+@Entity
 public class ETicketSingleType extends ETicketType {
 	private static final long serialVersionUID = -3660552449625301723L;
 

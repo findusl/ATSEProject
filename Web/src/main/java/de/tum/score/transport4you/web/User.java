@@ -54,7 +54,7 @@ public class User {
 		this.date = new Date();
 	}
 
-	public User(String group, String user_name, String user_email, String user_ticket, String user_password){
+	public User(String group, String user_name, String user_email, String user_password){
 		this();
 
 		if(group != null){
@@ -64,8 +64,7 @@ public class User {
 		}
 		this.name = user_name;
 		this.email = user_email;
-		ticket = user_ticket;
-		password = user_password;
+		this.password = user_password;
 		System.err.println("User.java: name: '"+name+"'");
 	}
 	
@@ -89,18 +88,6 @@ public class User {
 	
 	}
 
-	public static ArrayList<ETicket> dummy_list (){
-		ArrayList<ETicket> list = new ArrayList<ETicket>();
-		ETicket bla = new ETicket();
-		bla.setId(4);
-		bla.setInvalidated(false);
-		Date d = new Date(2016,4,3);
-		bla.setValidTime(d.getTime());
-		bla.setValidUntil(d);
-		bla.setCustomerId("foo");
-		list.add(bla);
-		return list;
-	}
 	
 	public static String createTicket(String id, String address, Double balance,ArrayList<ETicket> list) throws IOException{
 		// TODO: Key should be stored separately 
