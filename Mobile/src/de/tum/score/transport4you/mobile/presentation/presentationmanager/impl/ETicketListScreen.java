@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,15 +14,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import de.tum.score.transport4you.mobile.R;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.impl.ApplicationSingleton;
 import de.tum.score.transport4you.mobile.presentation.presentationmanager.IPresentation;
+import de.tum.score.transport4you.mobile.presentation.presentationmanager.qrcode.GenerateQRCodeActivity;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 
-public class ETicketListScreen extends Activity implements IPresentation{
+public class ETicketListScreen extends Activity implements IPresentation, OnItemSelectedListener{
     private IMainApplication mainApplication;
 
 	/** Called when the activity is first created. */
@@ -47,7 +50,19 @@ public class ETicketListScreen extends Activity implements IPresentation{
         
         // Attach the adapter to a ListView
         ListView listView = (ListView) findViewById(R.id.list_etickets);
-        listView.setAdapter(adapter);  
+        listView.setAdapter(adapter);
+        listView.setOnItemSelectedListener(this);
+    }
+    
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    	startActivity(new Intent(this, GenerateQRCodeActivity.class));
+    }
+    
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+    	// TODO Auto-generated method stub
+    	
     }
 	
     public void onDestroy() {
