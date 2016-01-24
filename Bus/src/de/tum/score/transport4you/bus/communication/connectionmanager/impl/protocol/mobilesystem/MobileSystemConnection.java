@@ -12,6 +12,14 @@ import javax.crypto.SecretKey;
 
 import org.apache.log4j.Logger;
 
+import de.tum.score.transport4you.bus.communication.bluetoothcontroller.data.BluetoothConnection;
+import de.tum.score.transport4you.bus.communication.connectionmanager.CommunicationType;
+import de.tum.score.transport4you.bus.communication.connectionmanager.IConnectionContext;
+import de.tum.score.transport4you.bus.communication.connectionmanager.error.SendDataException;
+import de.tum.score.transport4you.bus.communication.connectionmanager.impl.ConnectionController;
+import de.tum.score.transport4you.bus.communication.connectionmanager.impl.protocol.IncomingType;
+import de.tum.score.transport4you.bus.data.datacontroller.DataControllerInterfaceCoordinator;
+import de.tum.score.transport4you.bus.data.datacontroller.error.ConfigurationLoadingException;
 import de.tum.score.transport4you.shared.mobilebus.data.IKeyExchange;
 import de.tum.score.transport4you.shared.mobilebus.data.error.KeyAgreementException;
 import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.DHParameter;
@@ -23,14 +31,6 @@ import de.tum.score.transport4you.shared.mobilebus.data.impl.message.DataMessage
 import de.tum.score.transport4you.shared.mobilebus.data.impl.message.KeyExchangeFinishMessage;
 import de.tum.score.transport4you.shared.mobilebus.data.impl.message.KeyExchangePublicKeyMessage;
 import de.tum.score.transport4you.shared.mobilebus.data.impl.message.ProtocolExceptionMessage;
-import de.tum.score.transport4you.bus.communication.bluetoothcontroller.data.BluetoothConnection;
-import de.tum.score.transport4you.bus.communication.connectionmanager.CommunicationType;
-import de.tum.score.transport4you.bus.communication.connectionmanager.IConnectionContext;
-import de.tum.score.transport4you.bus.communication.connectionmanager.error.SendDataException;
-import de.tum.score.transport4you.bus.communication.connectionmanager.impl.ConnectionController;
-import de.tum.score.transport4you.bus.communication.connectionmanager.impl.protocol.IncomingType;
-import de.tum.score.transport4you.bus.data.datacontroller.DataControllerInterfaceCoordinator;
-import de.tum.score.transport4you.bus.data.datacontroller.error.ConfigurationLoadingException;
 
 /**
  * This class represents a connection with input and output stream as well as a thread listening on the input 

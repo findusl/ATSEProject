@@ -58,9 +58,10 @@ public class ConnectedThread extends Thread {
 		            	BluetoothEnvelope bufferObj = null;
 		            	Object incomingObject = objectInStream.readObject();
 		            	bluetoothTimeout.setTimeout(false);
-		            	Log.i("T4Y", "Object received - [" + incomingObject.getClass().getName() + "]");
 		            	
 		            	if(incomingObject == null) break;
+		            	
+		            	Log.i("T4Y", "Object received - [" + incomingObject.getClass().getName() + "]");
 		            	
 		            	if (incomingObject instanceof BluetoothEnvelope) {
 		            		bufferObj = (BluetoothEnvelope) incomingObject;

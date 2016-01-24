@@ -9,16 +9,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import de.tum.score.transport4you.shared.mobilebus.data.impl.message.AvailableETicketTypesMessage;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.message.ETicketPurchaseFailedMessage;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.message.PurchaseETicketFinishMessage;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.message.PurchaseETicketTypeMessage;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.message.ValidETicketMessage;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.AbstractPersistenceObject;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 import de.tum.score.transport4you.bus.communication.connectionmanager.ConnectionManagerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.communication.connectionmanager.IConnectionContext;
 import de.tum.score.transport4you.bus.communication.connectionmanager.error.SendDataException;
@@ -29,6 +19,16 @@ import de.tum.score.transport4you.bus.data.datacontroller.data.PrePayTransaction
 import de.tum.score.transport4you.bus.data.datacontroller.data.Trip;
 import de.tum.score.transport4you.bus.data.datacontroller.error.ConfigurationLoadingException;
 import de.tum.score.transport4you.bus.data.datacontroller.error.PersistenceException;
+import de.tum.score.transport4you.shared.mobilebus.data.impl.message.AvailableETicketTypesMessage;
+import de.tum.score.transport4you.shared.mobilebus.data.impl.message.ETicketPurchaseFailedMessage;
+import de.tum.score.transport4you.shared.mobilebus.data.impl.message.PurchaseETicketFinishMessage;
+import de.tum.score.transport4you.shared.mobilebus.data.impl.message.PurchaseETicketTypeMessage;
+import de.tum.score.transport4you.shared.mobilebus.data.impl.message.ValidETicketMessage;
+import de.tum.score.transport4you.shared.mobilebusweb.data.impl.AbstractPersistenceObject;
+import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
+import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
+import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;
+import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 
 /**
  * This class represents a connection with the customer

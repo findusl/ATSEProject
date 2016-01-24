@@ -13,8 +13,6 @@ import org.bouncycastle.openssl.PEMReader;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.KeyExchange;
-import de.tum.score.transport4you.shared.mobilebus.data.impl.keyexchange.SignedPublicKey;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
 

@@ -1,23 +1,16 @@
 package de.tum.score.transport4you.mobile.application.applicationcontroller.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.StreamCorruptedException;
 import java.security.PublicKey;
 import java.security.Security;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Notification;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import de.tum.score.transport4you.mobile.R;
 import de.tum.score.transport4you.mobile.application.ICommunicationListener;
@@ -45,7 +38,6 @@ import de.tum.score.transport4you.shared.mobilebus.data.impl.message.PurchaseETi
 import de.tum.score.transport4you.shared.mobilebus.data.impl.message.ValidETicketMessage;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEntry;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.BlobEnvelope;
-import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket;
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType;
 import de.tum.score.transport4you.shared.mobileweb.impl.message.MobileSettings;
 

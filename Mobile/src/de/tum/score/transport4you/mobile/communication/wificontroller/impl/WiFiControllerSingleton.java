@@ -1,7 +1,7 @@
 package de.tum.score.transport4you.mobile.communication.wificontroller.impl;
 
-import de.tum.score.transport4you.mobile.communication.wificontroller.IWiFi;
 import android.content.Context;
+import de.tum.score.transport4you.mobile.communication.wificontroller.IWiFi;
 
 public class WiFiControllerSingleton {
 	private static WiFiController wiFiController;

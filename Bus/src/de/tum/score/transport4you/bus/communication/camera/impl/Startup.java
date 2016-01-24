@@ -2,7 +2,6 @@ package de.tum.score.transport4you.bus.communication.camera.impl;
 
 import org.apache.log4j.Logger;
 
-import de.tum.score.transport4you.bus.communication.camera.CameraControllerInterfaceCoordinator;
 import de.tum.score.transport4you.bus.communication.camera.IStartup;
 
 public class Startup implements IStartup {

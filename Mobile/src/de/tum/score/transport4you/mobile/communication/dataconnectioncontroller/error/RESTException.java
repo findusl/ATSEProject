@@ -5,4 +5,8 @@ public class RESTException extends Exception {
 	public RESTException(String error) {
 		super(error);
 	}
+	
+	public RESTException(String error, Throwable throwable) {
+		super(error, throwable);
+	}
 }
