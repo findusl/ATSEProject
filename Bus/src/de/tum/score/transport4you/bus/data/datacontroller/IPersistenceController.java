@@ -18,4 +18,5 @@ public interface IPersistenceController {
 	 */
 	public void save(List<AbstractPersistenceObject> persistenceObjectList) throws PersistenceException;
 
+	public void save(AbstractPersistenceObject object);
 }
