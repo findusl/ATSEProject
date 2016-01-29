@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import de.tum.score.transport4you.mobile.R;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
@@ -34,7 +33,12 @@ public class ETicketListScreen extends Activity implements IPresentation, OnItem
         
         mainApplication = ApplicationSingleton.getApplicationController();
         mainApplication.registerActivity(this);
-        
+    }
+
+    @Override
+    protected void onStart() {
+    	//reload tickets every time.
+    	
 		BlobEntry entry = mainApplication.getStoredBlobEntry();
         
 		ArrayList<ETicket> tickets = new ArrayList<ETicket>();
@@ -51,6 +55,7 @@ public class ETicketListScreen extends Activity implements IPresentation, OnItem
         ListView listView = (ListView) findViewById(R.id.list_etickets);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
+    	super.onStart();
     }
 
 	@Override
@@ -61,7 +66,8 @@ public class ETicketListScreen extends Activity implements IPresentation, OnItem
     	startActivity(intent);
     }
 	
-    public void onDestroy() {
+    @Override
+	public void onDestroy() {
     	super.onDestroy();
     }
 

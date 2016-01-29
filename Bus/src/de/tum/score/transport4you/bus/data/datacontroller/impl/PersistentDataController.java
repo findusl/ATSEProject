@@ -100,6 +100,19 @@ public class PersistentDataController implements ITripsDataController, IETicketT
 		}
 		
 	}
+	
+	@Override
+	public void save(AbstractPersistenceObject object) {
+		entityManager.getTransaction().begin();
+		if(object.getPersistenceId()==0){
+			//Not managed yet
+			entityManager.persist(object);
+		} else {
+			entityManager.merge(object);
+		}
+		entityManager.flush();
+		entityManager.getTransaction().commit();
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
