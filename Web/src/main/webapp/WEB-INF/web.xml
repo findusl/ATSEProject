@@ -13,6 +13,16 @@ version="2.5">
 		<servlet-name>add</servlet-name>
 		<url-pattern>/add</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>purchaseTicket</servlet-name>
+		<servlet-class>de.tum.score.transport4you.web.PurchaseTicket</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>purchaseTicket</servlet-name>
+		<url-pattern>/purchaseTicket</url-pattern>
+	</servlet-mapping>
 
 	<servlet>
 		<servlet-name>ScoreServlet</servlet-name>

@@ -2,10 +2,15 @@ package de.tum.score.transport4you.shared.mobilebusweb.data.impl;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class ETicketSeason extends ETicket {
 	private static final long serialVersionUID = 3943512294028102303L;
 
-	public ETicketSeason(ETicketSeasonType ticketType, String customerId) {
+	protected ETicketSeason() {}
+	
+	public ETicketSeason(ETicketSeasonType ticketType, long customerId) {
 		this.ticketType = ticketType;
 		this.customerId = customerId;
 		this.validMinutes = ticketType.getValidMinutes();

@@ -122,6 +122,7 @@ public class User {
 		PEMReader pemReader = null;
 		pemReader = new PEMReader(new StringReader(pem));
 		PrivateKey blobEncryptionPrivateKey = ((KeyPair) pemReader.readObject()).getPrivate();
+		pemReader.close();
 		BlobEntry blobEntry = new BlobEntry();
 		blobEntry.setAccountType("prePayAccount");
 		blobEntry.setUserId(id);

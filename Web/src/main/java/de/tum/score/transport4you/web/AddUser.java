@@ -29,14 +29,12 @@ public class AddUser extends HttpServlet {
 		String group = "default";
 		String name = req.getParameter("user_name");
 		String email = req.getParameter("user_email");
-		String id = req.getParameter("user_id");
-		String address = req.getParameter("user_address");
-		String balance = req.getParameter("user_balance");
-		String ticket = User.createTicket(id,address,new Double(balance),User.dummy_list());
 		String password = User.hash(req.getParameter("user_password"));	
 
-		user = new User(group,name,email,ticket,password);
-		System.err.println("AddUser.java Name:"+name+" In the object: '"+user.name+"'");		
+		user = new User(group,name,email,password);
+		
+		System.err.println("AddUser.java Name:"+name+" In the object: '"+user.name+"'");
+		
 		ObjectifyService.ofy().save().entity(user).now();
 
 		resp.sendRedirect("/score.jsp");

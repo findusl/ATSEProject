@@ -5,7 +5,10 @@
 	<persistence-unit name="T4Y_BUS" transaction-type="RESOURCE_LOCAL">
 		<class>de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketType</class>
 		<class>de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketSingleType</class>
-		<class>de.tukl.score.transport4you.bus.data.datacontroller.data.ETicket</class>
+		<class>de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketSeasonType</class>
+		<class>de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicket</class>
+		<class>de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketSingle</class>
+		<class>de.tum.score.transport4you.shared.mobilebusweb.data.impl.ETicketSeason</class>
 		<class>de.tukl.score.transport4you.bus.data.datacontroller.data.PaymentTransaction</class>
 		<class>de.tukl.score.transport4you.bus.data.datacontroller.data.PrePayTransaction</class>
 		<class>de.tukl.score.transport4you.bus.data.datacontroller.data.PostPayTransaction</class>

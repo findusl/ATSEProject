@@ -1,6 +1,8 @@
 package de.tum.score.transport4you.shared.mobilebusweb.data.impl;
 
 import java.util.Date;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.TemporalType;
  * @author hoerning
  */
 @Entity
+@Cacheable(false)
 public abstract class ETicket extends AbstractPersistenceObject {
 	private static final long serialVersionUID = 4865268647836014207L;
 
@@ -22,7 +25,7 @@ public abstract class ETicket extends AbstractPersistenceObject {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	protected long id;
 	
-	protected String customerId;
+	protected long customerId;
 	
 	protected int validMinutes;
 	
@@ -65,11 +68,11 @@ public abstract class ETicket extends AbstractPersistenceObject {
 		return sellingDate;
 	}
 
-	public String getCustomerId() {
+	public long getCustomerId() {
 		return customerId;
 	}
 
-	public void setCustomerId(String customerId) {
+	public void setCustomerId(long customerId) {
 		this.customerId = customerId;
 	}
 
