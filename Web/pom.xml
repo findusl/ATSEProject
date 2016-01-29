@@ -16,10 +16,15 @@ This change however makes no sense to me....
 	
 	<repositories>
 	    <repository>
-		<id>maven-restlet</id>
-		<name>Restlet repository</name>
-		<url>http://maven.restlet.com</url>
+			<id>maven-restlet</id>
+			<name>Restlet repository</name>
+			<url>http://maven.restlet.com</url>
 	    </repository>
+		<repository>
+			<id>oss.sonatype.org</id>
+			<name>OSS Sonatype Staging</name>
+			<url>https://oss.sonatype.org/content/groups/staging</url>
+		</repository>
 	</repositories>
 
     <properties>
@@ -56,7 +61,26 @@ This change however makes no sense to me....
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
+		
+		<dependency>
+   			<groupId>org.eclipse.persistence</groupId>
+   			<artifactId>org.eclipse.persistence.jpa</artifactId>
+   			<version>2.5.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.14</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		
+		
 <!-- [START Objectify_Dependencies] -->
         <dependency>
           <groupId>com.google.guava</groupId>
