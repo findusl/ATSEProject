@@ -1,5 +1,8 @@
 package de.tum.score.transport4you.shared.mobilebusweb.data.impl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
@@ -31,13 +34,35 @@ public class ETicketSingle extends ETicket {
 			return new Date(Long.MAX_VALUE);
 		}
 	}
+
+	@Override
+	public byte[] toBytes() {		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(baos);
+		try {
+			// header for single ticket
+			dos.writeBytes("T4YB");
+			// customer ID
+			dos.writeLong(this.getCustomerId());
+			// selling date
+			dos.writeLong(this.getSellingDate().getTime());
+			// valid minutes
+			dos.writeLong(this.getValidMinutes());
+			dos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("SeasonTicket in bytes: " + baos.toByteArray() + " (" + baos.size() + ")");
+		return baos.toByteArray();
+	}
 	
 	public static void main(String[] args) {
 		DataManager dm = DataManager.getInstance();
 		
-		System.out.println("Proudly presenting: ETicketTypes!");
-		for (ETicketType type : dm.getETicketTypes()) {
-			System.out.println(type);
+		System.out.println("Proudly presenting: ETickets!");
+		for (ETicket ticket : dm.getETicketsForUser(5629499534213120L)) {
+			System.out.println(ticket);
+			ticket.toBytes();
 		}
 	}
 }

@@ -18,7 +18,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Cacheable(false)
-public abstract class ETicket extends AbstractPersistenceObject {
+public abstract class ETicket extends AbstractPersistenceObject implements BinaryRepresentation {
 	private static final long serialVersionUID = 4865268647836014207L;
 
 	@Id

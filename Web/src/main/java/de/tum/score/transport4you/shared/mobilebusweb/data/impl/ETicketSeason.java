@@ -1,7 +1,9 @@
 package de.tum.score.transport4you.shared.mobilebusweb.data.impl;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.Date;
-
 import javax.persistence.Entity;
 
 @Entity
@@ -24,4 +26,24 @@ public class ETicketSeason extends ETicket {
 		return new Date(this.getSellingDate().getTime() + validMillis);
 	}
 
+	@Override
+	public byte[] toBytes() {		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(baos);
+		try {
+			// header for season ticket
+			dos.writeBytes("T4YA");
+			// customer ID
+			dos.writeLong(this.getCustomerId());
+			// selling date
+			dos.writeLong(this.getSellingDate().getTime());
+			// valid minutes
+			dos.writeLong(this.getValidMinutes());
+			dos.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("SeasonTicket in bytes: " + baos.toByteArray() + " (" + baos.size() + ")");
+		return baos.toByteArray();
+	}
 }
