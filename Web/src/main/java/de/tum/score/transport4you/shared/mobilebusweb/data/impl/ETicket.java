@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * Represents an ETicket
@@ -37,6 +38,9 @@ public abstract class ETicket extends AbstractPersistenceObject implements Binar
 	
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	protected ETicketType ticketType;
+	
+	@Transient
+	protected byte[] encryptedTicket;
 	
 	/**
 	 * The constructor ensures that the selling date is always set on creation.
@@ -113,10 +117,20 @@ public abstract class ETicket extends AbstractPersistenceObject implements Binar
 		
 		return false;
 	}
+	
+	public void encryptTicket() {
+		EncryptionManager em;
+		try {
+			em = new EncryptionManager();
+			this.encryptedTicket = em.encryptSequence(this.toBytes());
+		} catch (Exception e) {
+			System.err.println("Error encrypting ticket!");
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public long getPersistenceId() {
 		return this.id;
 	}
-
 }
