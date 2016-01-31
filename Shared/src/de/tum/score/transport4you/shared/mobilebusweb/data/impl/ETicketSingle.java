@@ -4,17 +4,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Date;
+
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 @Entity
 public class ETicketSingle extends ETicket {
 	private static final long serialVersionUID = 7076088907132401192L;
-	
-	protected ETicketSingle() {}
-	
+
+	protected ETicketSingle() {
+	}
+
 	public ETicketSingle(ETicketSingleType ticketType, long customerId) {
 		this.ticketType = ticketType;
 		this.customerId = customerId;
@@ -24,9 +23,10 @@ public class ETicketSingle extends ETicket {
 	@Override
 	public Date getValidUntil() {
 		final long MINUTE_IN_MILLIS = 60 * 1000;
-		
+
 		if (this.isInvalidated()) {
-			// invalidated tickets are valid for `validMinutes` after invalidation date
+			// invalidated tickets are valid for `validMinutes` after
+			// invalidation date
 			long validMillis = this.getValidMinutes() * MINUTE_IN_MILLIS;
 			return new Date(this.getInvalidatedAt().getTime() + validMillis);
 		} else {
@@ -36,7 +36,7 @@ public class ETicketSingle extends ETicket {
 	}
 
 	@Override
-	public byte[] toBytes() {		
+	public byte[] toBytes() {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(baos);
 		try {
@@ -52,13 +52,14 @@ public class ETicketSingle extends ETicket {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("SeasonTicket in bytes: " + baos.toByteArray() + " (" + baos.size() + ")");
+		System.out.println("SeasonTicket in bytes: " + baos.toByteArray()
+				+ " (" + baos.size() + ")");
 		return baos.toByteArray();
 	}
-	
+
 	public static void main(String[] args) {
 		DataManager dm = DataManager.getInstance();
-		
+
 		System.out.println("Proudly presenting: ETickets!");
 		for (ETicket ticket : dm.getETicketsForUser(5629499534213120L)) {
 			System.out.println(ticket);

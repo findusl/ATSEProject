@@ -15,40 +15,41 @@ import javax.persistence.Transient;
 
 /**
  * Represents an ETicket
+ * 
  * @author hoerning
  */
 @Entity
 @Cacheable(false)
-public abstract class ETicket extends AbstractPersistenceObject implements BinaryRepresentation {
+public abstract class ETicket extends AbstractPersistenceObject implements
+		BinaryRepresentation, Cloneable {
 	private static final long serialVersionUID = 4865268647836014207L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	protected long id;
-	
+
 	protected long customerId;
-	
+
 	protected int validMinutes;
-	
+
 	@Temporal(value = TemporalType.TIMESTAMP)
 	protected Date invalidatedAt;
-	
+
 	@Temporal(value = TemporalType.TIMESTAMP)
 	protected Date sellingDate;
-	
+
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	protected ETicketType ticketType;
-	
+
 	@Transient
 	protected byte[] encryptedTicket;
-	
+
 	/**
 	 * The constructor ensures that the selling date is always set on creation.
 	 */
 	protected ETicket() {
 		this.sellingDate = new Date();
 	}
-	
 
 	public long getId() {
 		return id;
@@ -87,9 +88,10 @@ public abstract class ETicket extends AbstractPersistenceObject implements Binar
 	protected void setInvalidatedAt(Date invalidatedAt) {
 		this.invalidatedAt = invalidatedAt;
 	}
-	
+
 	/**
-	 * Invalidates this ETicket by setting the <code>invalidatedAt</code> date to the current date and time.
+	 * Invalidates this ETicket by setting the <code>invalidatedAt</code> date
+	 * to the current date and time.
 	 * 
 	 * @return true if successfully invalidated or false if already invalidated
 	 */
@@ -97,27 +99,28 @@ public abstract class ETicket extends AbstractPersistenceObject implements Binar
 		if (!this.isInvalidated()) {
 			// set invalidation date to now
 			this.setInvalidatedAt(new Date());
-			
+
 			// indicate successful invalidation
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean equals(Object o)  {
-		
-		if(!(o instanceof ETicket)){
+
+	@Override
+	public boolean equals(Object o) {
+
+		if (!(o instanceof ETicket)) {
 			return false;
 		}
-		
+
 		ETicket toCheck = (ETicket) o;
-		if(toCheck.id == this.id) {
+		if (toCheck.id == this.id) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
+
 	public void encryptTicket() {
 		EncryptionManager em;
 		try {
@@ -129,8 +132,23 @@ public abstract class ETicket extends AbstractPersistenceObject implements Binar
 		}
 	}
 
+	public byte[] getEncryptedTicket() {
+		return encryptedTicket;
+	}
+
 	@Override
 	public long getPersistenceId() {
 		return this.id;
+	}
+
+	@Override
+	public ETicket clone() {
+		try {
+			return (ETicket) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException(
+					"Should not happen according to the java api, as long as ETicket implements Cloneable.",
+					e);
+		}
 	}
 }

@@ -15,7 +15,7 @@ import javax.persistence.Id;
  */
 @Entity
 @Cacheable(false)
-public abstract class ETicketType extends AbstractPersistenceObject{
+public abstract class ETicketType extends AbstractPersistenceObject implements Cloneable{
 	private static final long serialVersionUID = 8280256021201295627L;
 	
 	@Id
@@ -83,6 +83,16 @@ public abstract class ETicketType extends AbstractPersistenceObject{
 	@Override
 	public long getPersistenceId() {
 		return this.id;
+	}
+	
+	@Override
+	public ETicketType clone()
+	{
+		try {
+			return (ETicketType) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException("Should not happen according to the java api, as long as ETicketType implements Cloneable.", e);
+		}
 	}
 	
 }
