@@ -1,5 +1,8 @@
 package de.tum.score.transport4you.shared.mobilebusweb.data.impl;
 
+import java.util.List;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,24 +14,39 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class ETicketType extends AbstractPersistenceObject{
-	
-	/**
-	 * 
-	 */
+@Cacheable(false)
+public abstract class ETicketType extends AbstractPersistenceObject{
 	private static final long serialVersionUID = 8280256021201295627L;
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
+		
+	protected String name;
 	
-	private String name;
+	/**
+	 * Indicates the number of minutes this ticket is valid, beginning at validated
+	 */
+	protected int validMinutes;
 	
-	private int validMinutes;
+	protected Double price;
 	
-	private Double price;
+	protected ETicketType() {
+		this.price = 0.0;
+		this.validMinutes = 0;
+	}
 	
-	private int amountTickets;
+	protected ETicketType(String name, int validMinutes) {
+		this();
+		assert validMinutes > 0;
+		
+		this.name = name;
+		this.validMinutes = validMinutes;
+	}
+	
+	abstract public List<ETicket> createTickets(long customerId);
+	
+	abstract public double getTotalPrice();
 
 	public String getName() {
 		return name;
@@ -60,14 +78,6 @@ public class ETicketType extends AbstractPersistenceObject{
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public int getAmountTickets() {
-		return amountTickets;
-	}
-
-	public void setAmountTickets(int amountTickets) {
-		this.amountTickets = amountTickets;
 	}
 
 	@Override
