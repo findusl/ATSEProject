@@ -14,14 +14,6 @@ public class TicketValidator {
 	
 	public TicketValidator(byte [] encrypted) {
 		byte [] cleartext = decrypt(encrypted);
-		//0x543459 41 12345678 12345678 12345678
-		
-		System.out.println("length " + cleartext.length);
-		
-/*		for(byte b : cleartext) {
-			System.out.print(" " + Integer.toHexString(b));
-		}
-		System.out.println();*/
 		
 		ByteBuffer bb = ByteBuffer.wrap(cleartext);
 		switch(bb.getInt()) {
@@ -36,11 +28,13 @@ public class TicketValidator {
 			System.out.println("Ticket header invalid");
 			return;
 		}
+		isValid=true;
 		ticketId = bb.getInt();
 		startDate = bb.getInt();
-//		endDate = bb.getInt();
+		endDate = bb.getInt();
 		System.out.println("Single ticket: " + singleTicket + " ticket id " + ticketId
 				 + " start date " + startDate + " enddate " + endDate);
+		System.out.println();
 	}
 	
 	private byte [] decrypt(byte [] encrypted) {

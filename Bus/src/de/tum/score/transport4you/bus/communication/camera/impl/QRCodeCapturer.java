@@ -122,7 +122,7 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory, I
 
 			if (result != null && result.getBarcodeFormat().equals(BarcodeFormat.QR_CODE)) {
 				for(ICameraQRCodeListener listener : listeners) {
-					listener.onQRCodeRead(result.getText());
+					listener.onQRCodeRead(result.getText().getBytes());
 				}
 			}
 
@@ -130,8 +130,8 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory, I
 	}
 	
 	@Override
-	public void onQRCodeRead(String content) {
-		TicketValidator tv = new TicketValidator(content.getBytes());
+	public void onQRCodeRead(byte [] content) {
+		TicketValidator tv = new TicketValidator(content);
 		String result = "Ticket invalid.";
 		if(tv.isValid()) {
 			if(tv.invalidateTicket()) {
