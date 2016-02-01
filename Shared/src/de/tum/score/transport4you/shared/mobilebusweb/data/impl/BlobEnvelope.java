@@ -9,9 +9,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Security;
 import java.security.Signature;
 import java.security.SignatureException;
 import java.security.SignedObject;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
  * Represents the envelope of the Blob synchronized between Mobile and Web
@@ -50,6 +53,7 @@ public class BlobEnvelope implements Serializable {
 			 privateKey = keypair.getPrivate();
 		}
 		try {
+			Security.addProvider(new BouncyCastleProvider());
 			this.signedBlobEntry = new SignedObject(publicBlobEntry, privateKey, Signature.getInstance("SHA1withRSA","BC"));
 		} catch (SignatureException e) {
 			// TODO Auto-generated catch block

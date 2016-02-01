@@ -28,9 +28,15 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>impl</name>
+			<name>shared</name>
 			<type>2</type>
-			<location>/Users/istefo/Development/ATSEProject/Shared/src/de/tum/score/transport4you/shared/mobilebusweb/data/impl</location>
+			<locationURI>SHARED_PROJ_LOC</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>SHARED_PROJ_LOC</name>
+			<value>$%7BPARENT-1-PROJECT_LOC%7D/Shared/src</value>
+		</variable>
+	</variableList>
 </projectDescription>
