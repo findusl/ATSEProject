@@ -15,7 +15,22 @@ public class TicketValidator {
 	private int ticketId, startDate, endDate;
 
 	public TicketValidator(byte[] encrypted) {
+		int i = 0;
+		for(byte b : encrypted) {
+			System.out.print(b + " ");
+			i++;
+			if(i == 4) {
+				System.out.println();
+				i = 0;
+			}
+		}
+		System.out.println();
 		byte[] cleartext = decrypt(encrypted);
+		
+		for(byte b : cleartext) {
+			System.out.print(b + " ");
+		}
+		System.out.println();
 
 		ByteBuffer bb = ByteBuffer.wrap(cleartext);
 		switch (bb.getInt()) {
