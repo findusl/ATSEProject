@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -44,6 +45,7 @@ public class GenerateQRCodeActivity extends Activity implements OnClickListener,
 			return;
 		}
 
+		content = Base64.encode(content, Base64.DEFAULT);
 		String log = "Bytes: ";
 		char[] chars = new char[content.length];
 		for (int i = 0; i < chars.length; i++) {
@@ -51,7 +53,7 @@ public class GenerateQRCodeActivity extends Activity implements OnClickListener,
 			log += content[i] + " ";
 		}
 		Log.i(TAG, log);
-		String text = new String(chars);
+		String text = new String(content);
 
 		mainApplication = ApplicationSingleton.getApplicationController();
 		mainApplication.registerActivity(this);
