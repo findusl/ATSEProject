@@ -21,10 +21,12 @@ import de.tum.score.transport4you.mobile.application.applicationcontroller.IMain
 import de.tum.score.transport4you.mobile.application.applicationcontroller.impl.ApplicationSingleton;
 import de.tum.score.transport4you.mobile.presentation.presentationmanager.IPresentation;
 
-public class GenerateQRCodeActivity extends Activity implements
-		OnClickListener, IPresentation {
+public class GenerateQRCodeActivity extends Activity implements OnClickListener, IPresentation {
+	private static final String TAG = GenerateQRCodeActivity.class.getSimpleName();
 
 	public static final String ARGS_TEXT = "text";
+
+	public static final int RETURN_USED = 12;
 
 	private String LOG_TAG = "GenerateQRCode";
 	private IMainApplication mainApplication;
@@ -42,10 +44,13 @@ public class GenerateQRCodeActivity extends Activity implements
 			return;
 		}
 
+		String log = "Bytes: ";
 		char[] chars = new char[content.length];
 		for (int i = 0; i < chars.length; i++) {
 			chars[i] = (char) (content[i] & 0xFF);
+			log += content[i] + " ";
 		}
+		Log.i(TAG, log);
 		String text = new String(chars);
 
 		mainApplication = ApplicationSingleton.getApplicationController();
@@ -73,9 +78,8 @@ public class GenerateQRCodeActivity extends Activity implements
 		smallerDimension = smallerDimension * 3 / 4;
 
 		// Encode with a QR Code image
-		QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(content, null,
-				Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(),
-				smallerDimension);
+		QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(content, null, Contents.Type.TEXT,
+				BarcodeFormat.QR_CODE.toString(), smallerDimension);
 		try {
 			Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
 			ImageView myImage = (ImageView) findViewById(R.id.imageView1);
@@ -88,7 +92,7 @@ public class GenerateQRCodeActivity extends Activity implements
 
 	@Override
 	public void onClick(View v) {
-		// TODO set ticket to used
+		setResult(RETURN_USED);
 		finish();
 	}
 
@@ -98,8 +102,7 @@ public class GenerateQRCodeActivity extends Activity implements
 	}
 
 	@Override
-	public void updateProgessDialog(String title, String message,
-			boolean visible, Integer increment) {
+	public void updateProgessDialog(String title, String message, boolean visible, Integer increment) {
 		// TODO Auto-generated method stub
 
 	}

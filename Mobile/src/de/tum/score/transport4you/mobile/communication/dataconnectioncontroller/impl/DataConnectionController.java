@@ -25,7 +25,6 @@ import org.w3c.dom.Document;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.communication.dataconnectioncontroller.IData;
 import de.tum.score.transport4you.mobile.communication.dataconnectioncontroller.error.RESTException;
@@ -34,113 +33,122 @@ import de.tum.score.transport4you.shared.mobileweb.impl.message.MobileSettings;
 
 @TargetApi(Build.VERSION_CODES.FROYO)
 public class DataConnectionController implements IData {
-	private static final String LOG_TAG = DataConnectionController.class.getSimpleName();
+	private static final String LOG_TAG = DataConnectionController.class
+			.getSimpleName();
 
-	private static final String baseURL = "http://transport4you-1185.appspot.com/rest/";//"http://score-1042.appspot.com/rest/";
+	private static final String baseURL = "http://10.0.2.2:8080/rest/";// "http://transport4you-1185.appspot.com/rest/";//"http://score-1042.appspot.com/rest/";
 	private IMainApplication mainApplication;
 	private Context context;
-	
+
 	public DataConnectionController(Context context, IMainApplication mainApp) {
 		this.mainApplication = mainApp;
 		this.context = context;
 	}
-	
-	@Override
-	public boolean checkAuthentication(Context context, String username, String password) throws RESTException {
 
-    	String md5 = computeMD5(password);
-	    try {
-	    	
-	    	//if debug mode is set, fix credentials for testing
-			if(mainApplication.isDebugModeEnabled()) {
+	@Override
+	public boolean checkAuthentication(Context context, String username,
+			String password) throws RESTException {
+
+		String md5 = computeMD5(password);
+		try {
+
+			// if debug mode is set, fix credentials for testing
+			if (mainApplication.isDebugModeEnabled()) {
 				username = "hans@example.com";
 				md5 = "5ebe2294ecd0e0f08eab7690d2a6ee69";
 			}
-			
-	    	String output = new ClientResource(baseURL + "user/" + username + "/" + md5).get().getText();  
-	    	
-	    	if(output.toLowerCase().contains("wrong password"))	{
-	    		return false;	    		
-	    	} 
-	    	else
-	    	{
-	    		return true;
-	    	}	        
-	    } catch (ResourceException e) {
-	    	throw new RESTException("REST request failed (checkAuthentication)", e);
-	    } catch (IOException e) {
-	    	throw new RESTException("REST request failed (checkAuthentication)", e);
+
+			String output = new ClientResource(baseURL + "user/" + username
+					+ "/" + md5).get().getText();
+
+			if (output.toLowerCase().contains("wrong password")) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (ResourceException e) {
+			throw new RESTException(
+					"REST request failed (checkAuthentication)", e);
+		} catch (IOException e) {
+			throw new RESTException(
+					"REST request failed (checkAuthentication)", e);
 		}
 	}
-	
+
 	@Override
-	public BlobEnvelope synchronizeETickets(String username, String password, BlobEnvelope blob) throws RESTException {
-	    try {
+	public BlobEnvelope synchronizeETickets(String username, String password,
+			BlobEnvelope blob) throws RESTException {
+		try {
 			ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-			ObjectOutput out = new ObjectOutputStream(byteOutputStream);   
+			ObjectOutput out = new ObjectOutputStream(byteOutputStream);
 			out.writeObject(blob);
-			byte[] dataBytes = byteOutputStream.toByteArray(); 
-	    	
-	    	byte[] outputObject = Base64.encode(dataBytes);
-	    	
-    		String md5 = computeMD5(password);
-	    	
-    		//if debug mode is set, fix credentials for testing
-			if(mainApplication.isDebugModeEnabled()) {
+			byte[] dataBytes = byteOutputStream.toByteArray();
+
+			byte[] outputObject = Base64.encode(dataBytes);
+
+			String md5 = computeMD5(password);
+
+			// if debug mode is set, fix credentials for testing
+			if (mainApplication.isDebugModeEnabled()) {
 				username = "hans@example.com";
 				md5 = "5ebe2294ecd0e0f08eab7690d2a6ee69";
 			}
-	    	
-	    	String xml = new ClientResource(baseURL + "user/" + username + "/" + md5).get().getText();  
-	        
-	        InputStream is = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 
-	        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	        DocumentBuilder builder = factory.newDocumentBuilder();
-	        Document document = builder.parse(is);
+			String xml = new ClientResource(baseURL + "user/" + username + "/"
+					+ md5).get().getText();
 
-	        XPath xpath = XPathFactory.newInstance().newXPath();
+			InputStream is = new ByteArrayInputStream(xml.getBytes("UTF-8"));
 
-	        String ticketString = (String) xpath.evaluate("/user/ticket", document, XPathConstants.STRING);
-	        	        
-			ByteArrayInputStream byteInputStream = new ByteArrayInputStream(Base64.decode(ticketString.getBytes()));
+			DocumentBuilderFactory factory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder builder = factory.newDocumentBuilder();
+			Document document = builder.parse(is);
+
+			XPath xpath = XPathFactory.newInstance().newXPath();
+
+			String ticketString = (String) xpath.evaluate("/user/ticket",
+					document, XPathConstants.STRING);
+
+			ByteArrayInputStream byteInputStream = new ByteArrayInputStream(
+					Base64.decode(ticketString.getBytes()));
 			ObjectInput in = new ObjectInputStream(byteInputStream);
 			BlobEnvelope result = (BlobEnvelope) in.readObject();
-	        
-	        return result;
-	    } catch (Exception e) {
-	    	throw new RESTException("REST request failed (synchronizeETickets)");
-	    }
+
+			return result;
+		} catch (Exception e) {
+			throw new RESTException("REST request failed (synchronizeETickets)");
+		}
 	}
 
 	@Override
-	public MobileSettings synchronizeSettings(String username, String password,	MobileSettings mobileSettings) throws RESTException {
-		//for the time being do not sync settings with server and just return local settings
-		return mobileSettings;		
+	public MobileSettings synchronizeSettings(String username, String password,
+			MobileSettings mobileSettings) throws RESTException {
+		// for the time being do not sync settings with server and just return
+		// local settings
+		return mobileSettings;
 	}
-	
+
 	private static final String computeMD5(final String s) {
-	    final String MD5 = "MD5";
-	    try {
-	        // Create MD5 Hash
-	        MessageDigest digest = java.security.MessageDigest
-	                .getInstance(MD5);
-	        digest.update(s.getBytes());
-	        byte messageDigest[] = digest.digest();
+		final String MD5 = "MD5";
+		try {
+			// Create MD5 Hash
+			MessageDigest digest = java.security.MessageDigest.getInstance(MD5);
+			digest.update(s.getBytes());
+			byte messageDigest[] = digest.digest();
 
-	        // Create Hex String
-	        StringBuilder hexString = new StringBuilder();
-	        for (byte aMessageDigest : messageDigest) {
-	            String h = Integer.toHexString(0xFF & aMessageDigest);
-	            while (h.length() < 2)
-	                h = "0" + h;
-	            hexString.append(h);
-	        }
-	        return hexString.toString();
+			// Create Hex String
+			StringBuilder hexString = new StringBuilder();
+			for (byte aMessageDigest : messageDigest) {
+				String h = Integer.toHexString(0xFF & aMessageDigest);
+				while (h.length() < 2)
+					h = "0" + h;
+				hexString.append(h);
+			}
+			return hexString.toString();
 
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	    }
-	    return "";
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return "";
 	}
 }
