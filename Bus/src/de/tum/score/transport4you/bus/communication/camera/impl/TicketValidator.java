@@ -4,7 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Base64;
+
+import org.bouncycastle.util.encoders.Base64;
 
 import de.tum.score.transport4you.shared.mobilebusweb.data.impl.EncryptionManager;
 
@@ -26,7 +27,10 @@ public class TicketValidator {
 			}
 		}
 		System.out.println();
-		encrypted = Base64.getDecoder().decode(encrypted);
+		System.out.println(new String(encrypted));
+		//encrypted = Base64.getDecoder().decode(encrypted);
+		encrypted = Base64.decode(encrypted);
+		
 		byte[] cleartext = decrypt(encrypted);
 		
 		for(byte b : cleartext) {

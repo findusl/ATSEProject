@@ -21,16 +21,16 @@ import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.telephony.PhoneNumberUtils;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+
+import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.telephony.PhoneNumberUtils;
 
 public final class QRCodeEncoder {
 	private static final int WHITE = 0xFFFFFFFF;
@@ -223,12 +223,12 @@ public final class QRCodeEncoder {
 
 	private static String guessAppropriateEncoding(CharSequence contents) {
 		// Very crude at the moment
-		for (int i = 0; i < contents.length(); i++) {
+		/*for (int i = 0; i < contents.length(); i++) {
 			if (contents.charAt(i) > 0xFF) {
 				return "UTF-8";
 			}
-		}
-		return "UTF-8";
+		}*/
+		return "ISO-8859-1";
 	}
 
 	private static String trim(String s) {

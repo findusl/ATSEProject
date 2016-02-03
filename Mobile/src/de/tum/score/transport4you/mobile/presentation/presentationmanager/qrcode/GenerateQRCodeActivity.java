@@ -1,5 +1,8 @@
 package de.tum.score.transport4you.mobile.presentation.presentationmanager.qrcode;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,10 +16,6 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-
 import de.tum.score.transport4you.mobile.R;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.IMainApplication;
 import de.tum.score.transport4you.mobile.application.applicationcontroller.impl.ApplicationSingleton;
@@ -47,12 +46,12 @@ public class GenerateQRCodeActivity extends Activity implements OnClickListener,
 
 		content = Base64.encode(content, Base64.DEFAULT);
 		String log = "Bytes: ";
-		char[] chars = new char[content.length];
-		for (int i = 0; i < chars.length; i++) {
-			chars[i] = (char) (content[i] & 0xFF);
+		//char[] chars = new char[content.length];
+		for (int i = 0; i < content.length; i++) {
+			//chars[i] = (char) (content[i] & 0xFF);
 			log += content[i] + " ";
 		}
-		Log.i(TAG, log);
+		Log.i(TAG, log + "\n" + new String(content));
 		String text = new String(content);
 
 		mainApplication = ApplicationSingleton.getApplicationController();

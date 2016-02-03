@@ -131,6 +131,7 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory, I
 	
 	@Override
 	public void onQRCodeRead(byte [] content) {
+		try {
 		TicketValidator tv = new TicketValidator(content);
 		String result = "Ticket invalid.";
 		if(tv.isValid()) {
@@ -141,6 +142,9 @@ public class QRCodeCapturer extends JFrame implements Runnable, ThreadFactory, I
 			}
 		}
 		textarea.setText(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
