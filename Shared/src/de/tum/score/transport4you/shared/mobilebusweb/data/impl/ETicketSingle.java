@@ -43,17 +43,20 @@ public class ETicketSingle extends ETicket {
 			// header for single ticket
 			dos.writeBytes("T4YB");
 			// customer ID
-			dos.writeLong(this.getCustomerId());
+			dos.writeInt((int) this.getCustomerId());
 			// selling date
-			dos.writeLong(this.getSellingDate().getTime());
+			dos.writeInt((int) (this.getSellingDate().getTime() / 1000));
 			// valid minutes
-			dos.writeLong(this.getValidMinutes());
+			int validUntil = (int) (this.getValidUntil().getTime() / 1000);
+			if (validUntil < 0)
+				validUntil = Integer.MAX_VALUE;
+			dos.writeInt(validUntil);
 			dos.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("SeasonTicket in bytes: " + baos.toByteArray()
-				+ " (" + baos.size() + ")");
+		System.out.println("SeasonTicket in bytes: " + baos.toByteArray() + " (" + baos.size()
+				+ ")");
 		return baos.toByteArray();
 	}
 
